@@ -1,33 +1,9 @@
-# Reveal.js Code block Line Numbers
+# Plain Text Block Line Numbers
 
 ## Overview
 
-A 'library' for adding line numbers to code stylized using [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) in a [Reveal.js](https://github.com/hakimel/reveal.js) presentation.
+A simple 'library' for adding line numbers and hightlighting specific lines of plain text like log files.
 
-See a [live example](https://mikemiles86.github.io/reveal-line-numbers/#/)
-
-To learn more about this library, [read my blog post](http://www.mike-miles.com/blog/displaying-line-numbers-code-examples-revealjs-presentations) about writing it.
-
-## Dependencies
-
-This library depends on using Highlight.js in your Reveal.js presentation.
-
-## File placement
-
-Place these files into 'plugin/line-numbers/';
-
-### Adding library to presentation
-To use this library in a Reveal.js presentation, you need to add the 'line-numbers.js' to the list of dependencies in 'Reveal.initialize'.
-
-```javascript
-Reveal.initialize({
-  dependencies: [
-   // ...
-    {src: 'plugin/line-numbers/line-numbers.js'}
-    // ...
-  ]
-})
-```
 
 ## Usage
 
@@ -36,18 +12,12 @@ To add line numbers to a code block, just add the class 'line-numbers' to the &l
 
 ```html
 <pre><code class="line-numbers">
-/**
- * Example Code.
- */
-function my_example_code($line_numbers = TRUE) {
-  $message = 'This example code does';
-  $message .= ($line_numbers ? '' : ' not');
-  $message .= ' have line numbers.';
-
-  return $message;
-}
-
-print my_example_code(TRUE);
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+log4j:WARN No appenders could be found for logger (org.elasticsearch.plugins).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
 </code></pre>
 ```
 
@@ -58,38 +28,27 @@ To highlight particular line numbers in a code block, add the attribute 'data-hi
 * Specifcy a group of lines to highlight by seperating the start line and end line with a dash(-).
 
 _Example: to highlight the lines 1,2,3:_
+
 ```html
-<pre><code class="line-numbers" data-highlight-lines="1,2,3">
-/**
- * Example Code.
- */
-function my_example_code($line_numbers = TRUE) {
-  $message = 'This example code does';
-  $message .= 'Will have line numbers';
-  $message .= 'and will have highlighed line numbers.';
-
-  return $message;
-}
-
-print my_example_code(TRUE);
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+log4j:WARN No appenders could be found for logger (org.elasticsearch.plugins).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
 </code></pre>
 ```
 
 _Example: To highlight the lines 4 to 10:_
+
 ```html
 <pre><code class="line-numbers" data-highlight-lines="4-10">
-/**
- * Example Code.
- */
-function my_example_code($line_numbers = TRUE) {
-  $message = 'This example code does';
-  $message .= 'Will have line numbers';
-  $message .= 'and will have highlighed line numbers.';
-
-  return $message;
-}
-
-print my_example_code(TRUE);
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+log4j:WARN No appenders could be found for logger (org.elasticsearch.plugins).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
 </code></pre>
 ```
 
@@ -97,17 +56,11 @@ _Example: highlighting lines 1 to 3 and 5,7,9:_
 
 ```html
 <pre><code class="line-numbers" data-highlight-lines="1-3,5,7,9">
-/**
- * Example Code.
- */
-function my_example_code($line_numbers = TRUE) {
-  $message = 'This example code does';
-  $message .= 'Will have line numbers';
-  $message .= 'and will have highlighed line numbers.';
-
-  return $message;
-}
-
-print my_example_code(TRUE);
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+log4j:WARN No appenders could be found for logger (org.elasticsearch.plugins).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
 </code></pre>
 ```

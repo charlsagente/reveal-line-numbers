@@ -1,30 +1,9 @@
 /**
- * Place this file in your Reveal.js presentation in 'lib/js/'.
- *
- * Add this javascript library to a reaveal.js presentation by adding it as a
- * dependency in Reveal.initialize.
+ *Forked from: https://github.com/charlsagente/reveal-line-numbers/tree/master
  *
  */
 
-// Add an event listener when reveal is finished loading.
-Reveal.addEventListener( 'ready', function( event ) {
- // Check to see if code blocks with line-numbers class exist.
- if (document.getElementsByClassName("line-numbers").length > 0) {
-    // Include css.
-    var link = document.createElement( 'link' );
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = 'plugins/line-numbers/line-numbers.css';
-    // Add CSS to head
-    document.getElementsByTagName( 'head' )[0].appendChild( link );
-  }
-});
 
-// Adding an event listener on slidechanged event to add line numbers to
-// code blocks.
-Reveal.addEventListener('slidechanged', function(event) {
-  addLineNumbers();
-});
 
 function addLineNumbers() {
   // For any code blocks in the current slide with class 'line-numbers'.
@@ -35,7 +14,7 @@ function addLineNumbers() {
   for (var l = 0; l < line_numbers.length; l++) {
     highlights = [];
     // See if current block has highlight js and line number not already applied.
-    if (line_numbers[l].classList.contains('hljs') && (line_numbers[l].innerHTML.indexOf("line-number") < 1)) {
+    if ( (line_numbers[l].innerHTML.indexOf("line-number") < 1)) {
       // See if there are any lines that need to be highlighted.
       if (line_numbers[l].hasAttribute("data-highlight-lines")) {
         // Get the lines to be highlighted.
@@ -48,20 +27,25 @@ function addLineNumbers() {
       // Split the code block at new line.
       content = content.split("\n");
       // Loop through each line.
-      for (var n = 0; n < content.length; n++) {
+      for (var n = 1; n < content.length; n++) {
         // Add class 'line-number'.
         classes = 'line-number';
         // Should this line be highlighted?
-        if (highlights.indexOf(n+1) > -1) {
+        if (highlights.indexOf(n) > -1) {
           classes += ' highlight-line';
         }
+          else if(highlights.length <=0 && content[n].match(/WARNING|WARN|ERROR|FATAL|SEVERE/g)){ //add your own log_levels
+            classes += ' highlight-line';
+        }
+
+        content[n]=content[n].replace(/([.*+?^=!:${}()|\[\]\/\\]|WARNING|WARN|ERROR|FATAL|SEVERE)/g, "\<strong>$1</strong>");
         // Append line with line number span.
-        content[n] = "<span class=\"" + classes + "\"> </span>" + content[n];
+        content[n] ="<tr class=\""+classes+"\"><td>"+ "<span class=\"" + classes + "\"> </span>" +"</td><td>"+ content[n] +"</td></tr>";
       }
       // Rejoin all content.
       content = content.join("\n");
       // Replace content of code block.
-      line_numbers[l].innerHTML = content;
+      line_numbers[l].innerHTML = "<table>"+content+"</table>";
     }
   }
 }
@@ -107,4 +91,8 @@ function getLineNumberHighlights(line_numbers) {
   }
   // Return count of hightlight lines.
   return highlights;
+}
+
+window.onload=function() {
+  addLineNumbers();
 }
